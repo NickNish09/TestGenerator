@@ -1,4 +1,4 @@
-require 'rails/generators/base'
+require 'rails/generators'
 
 module TestGenerator
   class InstallGenerator < Rails::Generators::Base
