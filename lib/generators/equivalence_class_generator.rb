@@ -1,3 +1,4 @@
+require 'rails/generators/base'
 class EquivalenceClassGenerator < Rails::Generators::Base
   def create_equivalence_class_tests
     require 'json'
