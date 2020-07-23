@@ -1,4 +1,4 @@
-require 'rails/generators/base'
+require 'rails/generators'
 class UnitTestGenerator < Rails::Generators::Base
   def create_unit_tests
     require 'json'

@@ -2,7 +2,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "test_generator"
-  s.version     = "1.0"
+  s.version     = "1.2"
   s.platform    = "ruby"
   s.authors     = ["Nicholas Marques", "Rafael Fernandes"]
   s.email       = ["nnmarques97@gmail.com"]
@@ -14,5 +14,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rails', '>= 3.2.0'
   s.add_development_dependency 'cucumber-rails', '>= 0'
   s.add_development_dependency 'rspec-rails', '>= 0'
-  s.add_development_dependency 'aquarium', '>= 0'
+  s.add_dependency 'aquarium', '~>  0.7.1'
 end
