@@ -22,7 +22,7 @@ class UnitTestGenerator < Rails::Generators::NamedBase
     executed_arguments = {} # hash to store the executed arguments to avoid duplicity
 
     denylist = ["updated_at", "created_at", "id"]
-    # creating the factory arguments
+    # creating the default factory arguments
     lines.first['attrs'].keys.each do |key|
       unless denylist.include?(key)
         if( /(.*)_id$/.match?(key)) # it is an association
