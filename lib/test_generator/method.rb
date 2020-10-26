@@ -1,27 +1,20 @@
 module TestGenerator
   module Method
     include TestGenerator::Utils
+    include TestGenerator::Reflector
 
     def method_specs(line)
-      denylist = ["updated_at", "created_at", "id"]
-      klass, method_name, args, attrs, response = destruct(line)
+      klass, method_name, args, attrs = destruct(line)
 
-      attrs_string = "{ "
-      attrs.keys.each do |key|
-        unless denylist.include?(key)
-          unless(/(.*)_id$/.match?(key)) # if it is an association, ignore
-            attrs_string.concat("#{key}: '#{attrs[key]}', ")
-          end
-        end
-      end
-      final_attrs = attrs_string.reverse.sub(',', '} ').reverse
+      DatabaseCleaner.clean_with(:truncation)
+      DatabaseCleaner.start
+      DatabaseCleaner.clean
 
-      "describe '##{method_name}' do
-    it 'should' do
-      #{klass.downcase} = create(:#{klass.downcase}, #{final_attrs})
-      expect(#{klass.downcase}.#{method_name}(#{args.join(', ')})).to eq #{response}
-    end
-  end"
+      obj = FactoryBot.create(klass.tableize.singularize.to_sym)
+      
+      response = reflect(klass, method_name, args, obj)
+
+      "it '##{method_name}' do\n\t\texpect(subject.#{method_name}(#{args.join(', ')})).to eq(#{response})\n\tend"
     end
   end
 end

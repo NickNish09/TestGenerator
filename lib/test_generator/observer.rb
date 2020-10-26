@@ -1,6 +1,6 @@
 module TestGenerator
   module Observer
-    DENYLIST = [:attributes, :serializable_hash, :inspect, :has_one_attached]
+    DENYLIST = [:attributes, :serializable_hash, :inspect]
 
     include TestGenerator::Reflector
     
@@ -19,7 +19,7 @@ module TestGenerator
         observer.class_eval do
           methods.each do |method_name|
             define_method(method_name) do |*args, &block|
-              reflect(klass, method_name, args, self)
+              log(klass, method_name, args, self)
               super(*args, &block)
             end
           end
