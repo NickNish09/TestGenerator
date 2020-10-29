@@ -2,7 +2,7 @@ module TestGenerator
   module Observer
     DENYLIST = [:attributes, :serializable_hash, :inspect]
 
-    include TestGenerator::Reflector
+    include TestGenerator::Logger
     
     def self.included(base_klass)
       base_klass.extend(ClassMethods)
